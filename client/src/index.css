@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #046307;
+  --color-secondary: #D4AF37;
+  --color-accent: #D4AF37;
+  --color-bg-light: #f8fafc;
+  --color-text-dark: #0f172a;
+  --font-sans: 'Inter', sans-serif;
+}
+
+:root {
+  font-family: 'Inter', sans-serif;
+  background-color: #f9fafb;
+  /* Light gray background */
+  color: #1f2937;
+  /* Dark gray text */
+}
+
+.btn-primary {
+  @apply bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:opacity-90 transition-all;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-white px-6 py-2 rounded-lg font-semibold hover:opacity-90 transition-all;
+}
+
+.container-custom {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
