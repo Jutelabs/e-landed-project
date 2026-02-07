@@ -78,8 +78,8 @@ const LandingPage = () => {
                                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                                 />
                                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8">
-                                    <div className="text-white font-bold text-xl">The Ojo Family</div>
-                                    <div className="text-slate-300 text-sm">Proud Owners, Lekki Gardens</div>
+                                    <div className="text-white font-bold text-xl">The Emeka's Family</div>
+                                    <div className="text-slate-300 text-sm">Proud Owners, Anambra Gardens</div>
                                 </div>
                             </div>
                             <div className="absolute -bottom-10 -right-10 bg-white p-6 rounded-2xl shadow-xl max-w-xs hidden md:block border border-slate-100">

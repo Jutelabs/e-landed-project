@@ -22,7 +22,8 @@ export const AuthProvider = ({ children }) => {
                     'Content-Type': 'application/json',
                 },
             };
-            const { data } = await axios.post('http://localhost:5000/api/auth/login', { email, password }, config);
+            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+            const { data } = await axios.post(`${apiUrl}/api/auth/login`, { email, password }, config);
 
             setUser(data);
             localStorage.setItem('userInfo', JSON.stringify(data));
@@ -42,7 +43,8 @@ export const AuthProvider = ({ children }) => {
                     'Content-Type': 'application/json',
                 },
             };
-            const { data } = await axios.post('http://localhost:5000/api/auth/register', userData, config);
+            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+            const { data } = await axios.post(`${apiUrl}/api/auth/register`, userData, config);
 
             setUser(data);
             localStorage.setItem('userInfo', JSON.stringify(data));

@@ -28,8 +28,8 @@ const BuyerDashboard = () => {
                     </div>
                     <div className="space-y-4">
                         {[
-                            { name: 'Lekki Phase 2 Plot', stage: 'Title Search', progress: 65 },
-                            { name: 'Abuja Garden City', stage: 'Owner KYC', progress: 30 }
+                            { name: 'Awka Millennium City', stage: 'Title Search', progress: 65 },
+                            { name: 'Onitsha GRA', stage: 'Owner KYC', progress: 30 }
                         ].map((job, idx) => (
                             <div key={idx} className="space-y-1">
                                 <div className="flex justify-between text-sm">
@@ -48,8 +48,8 @@ const BuyerDashboard = () => {
                     <h3 className="font-bold text-slate-800 mb-4">Top Rated Developers</h3>
                     <div className="space-y-4">
                         {[
-                            { name: 'Zenith Real Estate', score: 99, location: 'Lagos' },
-                            { name: 'Heritage Homes', score: 96, location: 'Abuja' }
+                            { name: 'Zenith Real Estate', score: 99, location: 'Onitsha' },
+                            { name: 'Heritage Homes', score: 96, location: 'Awka' }
                         ].map((dev, idx) => (
                             <div key={idx} className="flex items-center justify-between group cursor-pointer hover:bg-slate-50 p-2 rounded-lg transition-colors">
                                 <div className="flex items-center gap-3">

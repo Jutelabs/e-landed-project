@@ -71,33 +71,54 @@ const CompanyDashboard = () => {
 
             <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                 <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-                    <h3 className="font-semibold text-slate-800">My Listings</h3>
+                    <h3 className="font-semibold text-slate-800 flex items-center gap-2">
+                        <Building2 size={18} className="text-[#046307]" /> My Listings
+                    </h3>
                     <button className="text-[#046307] text-sm font-medium hover:underline">View All</button>
                 </div>
                 <div className="divide-y divide-slate-50">
                     {listings.length === 0 ? (
-                        <div className="p-8 text-center text-slate-500">
-                            No properties listed yet. Start by adding one!
+                        <div className="p-12 text-center">
+                            <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-300">
+                                <Building2 size={32} />
+                            </div>
+                            <h3 className="text-slate-900 font-medium mb-1">No properties listed yet</h3>
+                            <p className="text-slate-500 text-sm mb-6">Start building your portfolio by adding your first property.</p>
+                            <button
+                                onClick={() => setIsModalOpen(true)}
+                                className="inline-flex items-center gap-2 text-[#046307] font-medium hover:underline"
+                            >
+                                <Plus size={16} /> Add Property
+                            </button>
                         </div>
                     ) : (
                         listings.map(item => (
-                            <div key={item._id} className="px-6 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors">
+                            <div key={item._id} className="px-6 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors group">
                                 <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center">
-                                        <Building2 className="text-slate-400" size={24} />
+                                    <div className="w-16 h-16 bg-slate-100 rounded-lg overflow-hidden">
+                                        {/* Placeholder for property image if available, else icon */}
+                                        <div className="w-full h-full flex items-center justify-center bg-slate-200 text-slate-400">
+                                            <Building2 size={24} />
+                                        </div>
                                     </div>
                                     <div>
-                                        <div className="font-medium text-slate-900">{item.title}</div>
-                                        <div className="text-xs text-slate-500">{item.location} • ₦{item.price.toLocaleString()}</div>
+                                        <div className="font-bold text-slate-900 group-hover:text-[#046307] transition-colors">{item.title}</div>
+                                        <div className="text-sm text-slate-500 flex items-center gap-2">
+                                            <span>{item.location}</span>
+                                            <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
+                                            <span>₦{item.price.toLocaleString()}</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-3">
-                                    <span className={`text-[10px] px-2 py-1 rounded-full font-bold uppercase tracking-wider ${item.verificationStatus === 'verified' ? 'bg-green-100 text-green-700' :
+                                <div className="flex items-center gap-4">
+                                    <div className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${item.verificationStatus === 'verified' ? 'bg-green-100 text-green-700' :
                                             item.verificationStatus === 'pending' ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-700'
                                         }`}>
                                         {item.verificationStatus}
-                                    </span>
-                                    <button className="p-2 text-slate-400 hover:text-slate-600"><FileText size={18} /></button>
+                                    </div>
+                                    <button className="p-2 text-slate-400 hover:text-[#046307] hover:bg-green-50 rounded-full transition-all">
+                                        <FileText size={20} />
+                                    </button>
                                 </div>
                             </div>
                         ))
