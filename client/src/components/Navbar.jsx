@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { ShieldCheck, LayoutDashboard } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import logo from '../assets/logo-with-no-bg.png';
 
 const Navbar = () => {
     const { user, logout } = useAuth();
@@ -13,14 +14,9 @@ const Navbar = () => {
 
     return (
         <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
-            <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div className="max-w-7xl mx-auto px-4 h-24 flex items-center justify-between">
                 <Link to="/" className="flex items-center gap-2 cursor-pointer">
-                    <div className="bg-gradient-to-br from-[#046307] to-[#088a0c] p-1.5 rounded-lg shadow-lg">
-                        <ShieldCheck className="text-white w-6 h-6" />
-                    </div>
-                    <span className="font-bold text-xl tracking-tight text-slate-900">
-                        E-LANDED
-                    </span>
+                    <img src={logo} alt="E-LANDED List" className="h-20 w-auto" />
                 </Link>
 
                 <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">

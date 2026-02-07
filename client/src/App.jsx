@@ -12,6 +12,7 @@ import CompanyDashboard from './pages/CompanyDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 
 import PatternedBackground from './components/PatternedBackground';
+import PremiumFooter from './components/PremiumFooter';
 
 function App() {
   return (
@@ -34,9 +35,7 @@ function App() {
               <Route path="/dashboard/admin" element={<AdminDashboard />} />
             </Routes>
           </main>
-          <footer className="bg-dark text-white py-8 text-center">
-            <p>&copy; {new Date().getFullYear()} E-LANDED. All rights reserved.</p>
-          </footer>
+          <PremiumFooter />
         </div>
       </Router>
     </AuthProvider>

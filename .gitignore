@@ -1,0 +1,9 @@
+node_modules/
+**/node_modules/
+.env
+client/dist/
+server/node_modules/
+*.pptx
+*.jpeg
+*.jpg
+*.png

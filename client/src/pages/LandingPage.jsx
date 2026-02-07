@@ -1,170 +1,216 @@
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, ShieldCheck, Building2, TrendingUp, Users, Globe, Award } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Building2, Globe, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import heroBg from '../assets/hero-bg.png';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Hero3D from '../components/Hero3D';
+import TrustMarquee from '../components/TrustMarquee';
+import happyHomePhoto from '../assets/happy-home.png';
+gsap.registerPlugin(ScrollTrigger);
 
 const LandingPage = () => {
+    const containerRef = useRef();
+
+    useGSAP(() => {
+        const sections = gsap.utils.toArray('.gsap-section');
+        sections.forEach((section) => {
+            gsap.fromTo(
+                section,
+                { opacity: 0, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 80%',
+                        end: 'top 50%',
+                        scrub: false,
+                    },
+                }
+            );
+        });
+    }, { scope: containerRef });
+
     return (
-        <div className="min-h-screen">
-            {/* Hero Section */}
-            <div className="relative h-[90vh] flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 z-0">
-                    <img
-                        src={heroBg}
-                        alt="Wide land with luxury house"
-                        className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30"></div>
-                </div>
+        <div ref={containerRef} className="min-h-screen bg-slate-50">
+            {/* 3D Hero Section */}
+            <Hero3D
+                title={
+                    <>
+                        Invest in <span className="text-[#D4AF37]">Premium</span> <br /> African Real Estate
+                    </>
+                }
+                subtitle="Secure your future with verified titles, vetted developers, and a seamless digital experience."
+                buttons={
+                    <>
+                        <Link
+                            to="/properties"
+                            className="bg-[#046307] text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-[#035205] transition-all shadow-lg hover:shadow-green-900/20"
+                        >
+                            Explore Marketplace
+                        </Link>
+                        <Link
+                            to="/register"
+                            className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all"
+                        >
+                            Become a Partner
+                        </Link>
+                    </>
+                }
+            />
 
-                <div className="relative z-10 text-center max-w-5xl mx-auto px-4 mt-16">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1 }}
-                    >
-                        <span className="inline-block px-4 py-1.5 bg-white/10 backdrop-blur-md text-white rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-white/20">
-                            The Future of African Real Estate
-                        </span>
-                        <h1 className="text-5xl md:text-7xl font-extrabold text-white leading-[1.1] tracking-tight mb-8">
-                            Building Trust in Every <br />
-                            <span className="text-[#D4AF37]">Square Meter.</span>
-                        </h1>
-                        <p className="text-xl text-gray-200 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
-                            E-LANDED is more than a marketplace. We are the digital infrastructure verifying ownership,
-                            empowering developers, and securing investments across the continent.
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Link
-                                to="/about"
-                                className="px-8 py-4 bg-[#046307] text-white rounded-2xl font-bold text-lg shadow-2xl hover:bg-[#057a09] hover:-translate-y-1 transition-all flex items-center justify-center gap-2"
-                            >
-                                Our Mission <ArrowRight size={20} />
-                            </Link>
-                            <Link
-                                to="/properties"
-                                className="px-8 py-4 bg-white/10 backdrop-blur-md text-white border border-white/30 rounded-2xl font-bold text-lg hover:bg-white/20 transition-all flex items-center justify-center"
-                            >
-                                Explore Marketplace
-                            </Link>
-                        </div>
-                    </motion.div>
-                </div>
-            </div>
+            {/* Trusted Brand Marquee */}
+            <TrustMarquee />
 
-            {/* Stats Section */}
-            <div className="bg-[#046307] py-12 border-b border-green-800">
-                <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
-                    <div>
-                        <div className="text-4xl font-bold mb-1">₦50B+</div>
-                        <div className="text-sm opacity-80 uppercase tracking-wider">Property Value Verified</div>
-                    </div>
-                    <div>
-                        <div className="text-4xl font-bold mb-1">10k+</div>
-                        <div className="text-sm opacity-80 uppercase tracking-wider">Verified Titles</div>
-                    </div>
-                    <div>
-                        <div className="text-4xl font-bold mb-1">500+</div>
-                        <div className="text-sm opacity-80 uppercase tracking-wider">Vetted Developers</div>
-                    </div>
-                    <div>
-                        <div className="text-4xl font-bold mb-1">0%</div>
-                        <div className="text-sm opacity-80 uppercase tracking-wider">Fraud Rate</div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Introduction / About Snippet */}
-            <section className="py-24 bg-white">
+            {/* Human Feel / Mission Section */}
+            <section className="py-24 bg-white gsap-section">
                 <div className="max-w-7xl mx-auto px-4">
-                    <div className="flex flex-col md:flex-row gap-16 items-center">
-                        <div className="md:w-1/2">
-                            <h2 className="text-4xl font-bold text-slate-900 mb-6">Redefining Real Estate Standards</h2>
-                            <p className="text-lg text-slate-600 mb-6 leading-relaxed">
-                                For too long, the property market has been plagued by opacity, duplicate titles, and mistrust.
-                                E-LANDED was born from a simple yet powerful idea: <strong>What if technology could guarantee trust?</strong>
-                            </p>
-                            <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                                By integrating directly with government land registries and implementing military-grade verification protocols for developers,
-                                we've created a safe haven for investors and a launchpad for legitimate real estate companies.
-                            </p>
-                            <div className="grid grid-cols-2 gap-6">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-[#046307]">
-                                        <Users size={20} />
-                                    </div>
-                                    <span className="font-semibold text-slate-800">Community First</span>
+                    <div className="flex flex-col md:flex-row gap-12 items-center">
+                        <div className="md:w-1/2 relative space-y-6">
+                            {/* Replaced with Unsplash "Human Feel" images as requested */}
+                            <div className="relative h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl">
+                                <img
+                                    src={happyHomePhoto}
+                                    alt="Happy African Family Home Owner"
+                                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                                />
+                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8">
+                                    <div className="text-white font-bold text-xl">The Ojo Family</div>
+                                    <div className="text-slate-300 text-sm">Proud Owners, Lekki Gardens</div>
                                 </div>
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-[#046307]">
-                                        <Globe size={20} />
+                            </div>
+                            <div className="absolute -bottom-10 -right-10 bg-white p-6 rounded-2xl shadow-xl max-w-xs hidden md:block border border-slate-100">
+                                <div className="flex items-center gap-4 mb-3">
+                                    <div className="bg-green-100 p-3 rounded-full text-[#046307]">
+                                        <ShieldCheck size={24} />
                                     </div>
-                                    <span className="font-semibold text-slate-800">Pan-African Vision</span>
+                                    <div>
+                                        <div className="font-bold text-slate-900">100% Verified</div>
+                                        <div className="text-xs text-slate-500">Title Document</div>
+                                    </div>
                                 </div>
+                                <p className="text-slate-600 text-sm">"We verified the land title instantly on E-LANDED before paying. Best decision ever."</p>
                             </div>
                         </div>
-                        <div className="md:w-1/2 relative">
-                            <div className="absolute -top-10 -right-10 w-64 h-64 bg-amber-50 rounded-full blur-3xl opacity-60"></div>
-                            <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-green-50 rounded-full blur-3xl opacity-60"></div>
-                            <div className="relative bg-slate-50 p-8 rounded-3xl border border-slate-100 shadow-xl">
-                                <div className="space-y-6">
-                                    <div className="flex items-start gap-4">
-                                        <div className="mt-1 bg-[#046307] p-2 rounded-lg text-white">
-                                            <ShieldCheck size={24} />
-                                        </div>
-                                        <div>
-                                            <h3 className="font-bold text-slate-900 text-lg">Verification Engine</h3>
-                                            <p className="text-slate-500 mt-1">Our proprietary system cross-checks 15+ data points per property.</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-start gap-4">
-                                        <div className="mt-1 bg-[#D4AF37] p-2 rounded-lg text-white">
-                                            <Award size={24} />
-                                        </div>
-                                        <div>
-                                            <h3 className="font-bold text-slate-900 text-lg">Developer Accreditation</h3>
-                                            <p className="text-slate-500 mt-1">Only the top 5% of developers pass our strict due diligence checks.</p>
-                                        </div>
-                                    </div>
+
+                        <div className="md:w-1/2">
+                            <span className="text-[#046307] font-bold tracking-wider uppercase text-sm mb-2 block">Our Promise</span>
+                            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight">
+                                Real Estate with a <br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#046307] to-[#D4AF37]">Human Touch.</span>
+                            </h2>
+                            <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                                Behind every transaction is a dream. Whether it's a family buying their first home,
+                                a diaspora investor building wealth back home, or a developer creating a masterpiece.
+                            </p>
+                            <p className="text-lg text-slate-600 mb-10 leading-relaxed">
+                                We don't just verify documents; we verify trust. Our platform ensures that the joy of ownership isn't marred by fraud or legal battles.
+                            </p>
+
+                            <div className="grid grid-cols-2 gap-8">
+                                <div className="space-y-2">
+                                    <div className="text-3xl font-bold text-slate-900">24/7</div>
+                                    <div className="text-sm text-slate-500 font-medium uppercase tracking-wide">Support Team</div>
+                                </div>
+                                <div className="space-y-2">
+                                    <div className="text-3xl font-bold text-slate-900">3 Days</div>
+                                    <div className="text-sm text-slate-500 font-medium uppercase tracking-wide">Avg. Verification</div>
                                 </div>
                             </div>
+
+                            <Link to="/about" className="inline-flex items-center gap-2 mt-10 text-[#046307] font-bold hover:gap-4 transition-all">
+                                Read Our Story <ArrowRight size={20} />
+                            </Link>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Features / Value Prop (Kept for clarity but styled differently) */}
-            <section className="py-24 bg-slate-50">
+            {/* Services / Business Model Section */}
+            <section className="py-24 bg-white gsap-section">
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl font-bold text-slate-900 mb-4">The E-LANDED Ecosystem</h2>
-                        <p className="text-slate-500 max-w-2xl mx-auto">A comprehensive platform serving the needs of modern real estate.</p>
+                        <span className="text-[#046307] font-bold tracking-wider uppercase text-sm mb-2 block">For Partners</span>
+                        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">Empowering Real Estate Companies</h2>
+                        <p className="text-slate-500 max-w-2xl mx-auto text-lg">
+                            We provide a suite of tools to elevate your brand, verify your projects, and connect you with serious investors.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {[
+                            { title: 'Listing & PR Services', desc: 'Get your properties seen by thousands of verified buyers and boost your brand authority.', icon: <Globe size={24} /> },
+                            { title: 'Verified Profiles', desc: 'Showcase your company’s legitimacy with our verified badge and detailed public profiles.', icon: <ShieldCheck size={24} /> },
+                            { title: 'Analytics & Insights', desc: 'Understand your market with detailed data on buyer behavior and property trends.', icon: <Users size={24} /> },
+                            { title: 'Consultancy', desc: 'Expert advice on digital transformation, compliance, and market strategy.', icon: <Building2 size={24} /> }
+                        ].map((service, index) => (
+                            <div key={index} className="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all group">
+                                <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-[#046307] mb-6 group-hover:bg-[#046307] group-hover:text-white transition-colors">
+                                    {service.icon}
+                                </div>
+                                <h3 className="font-bold text-xl text-slate-900 mb-3">{service.title}</h3>
+                                <p className="text-slate-600 text-sm leading-relaxed">{service.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Prototype Features / Why Use E-LANDED */}
+            <section className="py-24 bg-slate-50 gsap-section">
+                <div className="max-w-7xl mx-auto px-4">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl font-bold text-slate-900 mb-4">The E-LANDED Advantage</h2>
+                        <p className="text-slate-500 max-w-2xl mx-auto">Connecting credibility with discovery through our advanced platform.</p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div className="bg-white p-8 rounded-3xl border border-slate-100 hover:shadow-lg transition-all hover:-translate-y-1">
-                            <div className="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mb-6 text-[#046307]">
-                                <ShieldCheck size={32} />
+                        {/* Feature 1 */}
+                        <div className="group bg-white p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-2 cursor-pointer relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-green-50 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110"></div>
+                            <div className="relative z-10">
+                                <div className="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mb-6 text-[#046307]">
+                                    <ShieldCheck size={32} />
+                                </div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-3">Verified Company Profiles</h3>
+                                <p className="text-slate-600 leading-relaxed mb-6">Instantly distinguish legimite developers from fraudsters. Our rigorous vetting process ensures you only deal with the best.</p>
+                                <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden">
+                                    <div className="w-1/3 h-full bg-[#046307] group-hover:w-full transition-all duration-700"></div>
+                                </div>
                             </div>
-                            <h3 className="text-xl font-bold text-slate-900 mb-3">For Investors</h3>
-                            <p className="text-slate-600 leading-relaxed">Secure your future with title-verified properties and escrow protection.</p>
-                            <Link to="/register" className="inline-block mt-4 text-[#046307] font-semibold hover:underline">Start Investing &rarr;</Link>
                         </div>
-                        <div className="bg-white p-8 rounded-3xl border border-slate-100 hover:shadow-lg transition-all hover:-translate-y-1">
-                            <div className="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center mb-6 text-[#D4AF37]">
-                                <Building2 size={32} />
+
+                        {/* Feature 2 */}
+                        <div className="group bg-white p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-2 cursor-pointer relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-amber-50 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110"></div>
+                            <div className="relative z-10">
+                                <div className="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center mb-6 text-[#D4AF37]">
+                                    <Globe size={32} />
+                                </div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-3">PR Integration & Reach</h3>
+                                <p className="text-slate-600 leading-relaxed mb-6">High-visibility listings and featured placements that tell your brand story and reach millions of diaspora investors.</p>
+                                <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden">
+                                    <div className="w-2/3 h-full bg-[#D4AF37] group-hover:w-full transition-all duration-700"></div>
+                                </div>
                             </div>
-                            <h3 className="text-xl font-bold text-slate-900 mb-3">For Developers</h3>
-                            <p className="text-slate-600 leading-relaxed">Gain credibility and access a pool of serious, ready-to-buy investors.</p>
-                            <Link to="/register" className="inline-block mt-4 text-[#D4AF37] font-semibold hover:underline">Partner with Us &rarr;</Link>
                         </div>
-                        <div className="bg-white p-8 rounded-3xl border border-slate-100 hover:shadow-lg transition-all hover:-translate-y-1">
-                            <div className="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 text-blue-600">
-                                <Globe size={32} />
+
+                        {/* Feature 3 */}
+                        <div className="group bg-white p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-2 cursor-pointer relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110"></div>
+                            <div className="relative z-10">
+                                <div className="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 text-blue-600">
+                                    <Users size={32} />
+                                </div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-3">Seamless Buyer Interface</h3>
+                                <p className="text-slate-600 leading-relaxed mb-6">A frictionless experience for discovery, virtual tours, and secure payments, designed for the modern investor.</p>
+                                <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden">
+                                    <div className="w-1/2 h-full bg-blue-600 group-hover:w-full transition-all duration-700"></div>
+                                </div>
                             </div>
-                            <h3 className="text-xl font-bold text-slate-900 mb-3">For Diaspora</h3>
-                            <p className="text-slate-600 leading-relaxed">Invest in home from anywhere in the world with total peace of mind.</p>
-                            <Link to="/about" className="inline-block mt-4 text-blue-600 font-semibold hover:underline">Learn More &rarr;</Link>
                         </div>
                     </div>
                 </div>
