@@ -60,7 +60,7 @@ const PremiumFooter = () => {
                         <ul className="space-y-4 text-slate-400 text-sm">
                             <li className="flex items-start gap-3">
                                 <MapPin size={18} className="text-[#046307] mt-0.5" />
-                                <span>123 Victoria Island,<br />Lagos, Nigeria</span>
+                                <span>Oko, Anambra State,<br />Nigeria</span>
                             </li>
                             <li className="flex items-center gap-3">
                                 <Phone size={18} className="text-[#046307]" />
